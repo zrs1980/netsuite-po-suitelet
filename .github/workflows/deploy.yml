@@ -43,5 +43,17 @@ jobs:
             --consumerkey "$NS_CONSUMER_KEY" \
             --consumersecret "$NS_CONSUMER_SECRET"
 
+      - name: Debug - list CLI commands and credential storage
+        run: |
+          echo "=== CLI commands ==="
+          suitecloud --help
+          echo "=== project:deploy help ==="
+          suitecloud project:deploy --help || true
+          echo "=== Credential dirs ==="
+          ls -la ~/.oracle/netsuite/SuiteCloudSDK/ 2>/dev/null || echo "~/.oracle/netsuite not found"
+          find ~ -maxdepth 5 -name "*.json" -path "*/SuiteCloudSDK/*" 2>/dev/null | head -20
+          echo "=== suitecloud.config.js ==="
+          cat suitecloud.config.js
+
       - name: Deploy SDF project to NetSuite
         run: suitecloud project:deploy
