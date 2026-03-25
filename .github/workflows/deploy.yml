@@ -44,4 +44,4 @@ jobs:
             --consumersecret "$NS_CONSUMER_SECRET"
 
       - name: Deploy SDF project to NetSuite
-        run: suitecloud project:deploy --log-level INFO
+        run: suitecloud project:deploy
