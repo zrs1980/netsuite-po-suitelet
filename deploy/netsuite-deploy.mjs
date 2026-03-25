@@ -110,6 +110,8 @@ async function nsRequest(method, path, body = null) {
     Authorization:  oauthHeader(method, url),
     'Content-Type': 'application/json',
     Accept:         'application/json',
+    // Required by NetSuite SuiteQL endpoint; harmless for Record API calls
+    Prefer:         'transient',
   };
 
   const opts = { method, headers };
