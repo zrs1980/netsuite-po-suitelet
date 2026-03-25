@@ -27,6 +27,11 @@ jobs:
       - name: Install SuiteCloud CLI
         run: npm install -g @oracle/suitecloud-cli --legacy-peer-deps --acceptsuitecloudsdklicense
 
+      - name: Check SuiteCloud CLI version and auth help
+        run: |
+          suitecloud --version
+          suitecloud account:setup --help || true
+
       - name: Configure NetSuite Auth
         env:
           NS_ACCOUNT_ID:      ${{ secrets.NS_ACCOUNT_ID }}
@@ -36,7 +41,7 @@ jobs:
           NS_TOKEN_SECRET:    ${{ secrets.NS_TOKEN_SECRET }}
         run: |
           suitecloud account:setup \
-            --authid ci_deploy \
+            --auth-id ci_deploy \
             --account "$NS_ACCOUNT_ID" \
             --tokenid "$NS_TOKEN_ID" \
             --tokensecret "$NS_TOKEN_SECRET" \
@@ -44,4 +49,4 @@ jobs:
             --consumersecret "$NS_CONSUMER_SECRET"
 
       - name: Deploy SDF project to NetSuite
-        run: suitecloud project:deploy --authid ci_deploy --log-level INFO
+        run: suitecloud project:deploy --auth-id ci_deploy --log-level INFO
