@@ -27,7 +27,7 @@ jobs:
       - name: Install SuiteCloud CLI
         run: npm install -g @oracle/suitecloud-cli --legacy-peer-deps --acceptsuitecloudsdklicense
 
-      - name: Configure NetSuite Auth (TBA)
+      - name: Configure NetSuite Auth (TBA — no browser required)
         env:
           NS_ACCOUNT_ID:      ${{ secrets.NS_ACCOUNT_ID }}
           NS_CONSUMER_KEY:    ${{ secrets.NS_CONSUMER_KEY }}
@@ -35,25 +35,13 @@ jobs:
           NS_TOKEN_ID:        ${{ secrets.NS_TOKEN_ID }}
           NS_TOKEN_SECRET:    ${{ secrets.NS_TOKEN_SECRET }}
         run: |
-          suitecloud account:savetoken \
+          suitecloud account:setup:ci \
             --authid ci_deploy \
             --account "$NS_ACCOUNT_ID" \
             --tokenid "$NS_TOKEN_ID" \
             --tokensecret "$NS_TOKEN_SECRET" \
             --consumerkey "$NS_CONSUMER_KEY" \
             --consumersecret "$NS_CONSUMER_SECRET"
-
-      - name: Debug - list CLI commands and credential storage
-        run: |
-          echo "=== CLI commands ==="
-          suitecloud --help
-          echo "=== project:deploy help ==="
-          suitecloud project:deploy --help || true
-          echo "=== Credential dirs ==="
-          ls -la ~/.oracle/netsuite/SuiteCloudSDK/ 2>/dev/null || echo "~/.oracle/netsuite not found"
-          find ~ -maxdepth 5 -name "*.json" -path "*/SuiteCloudSDK/*" 2>/dev/null | head -20
-          echo "=== suitecloud.config.js ==="
-          cat suitecloud.config.js
 
       - name: Deploy SDF project to NetSuite
         run: suitecloud project:deploy
