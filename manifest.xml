@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest projecttype="ACCOUNTCUSTOMIZATION">
+  <projectname>loop-open-po-suitelet</projectname>
+  <frameworkversion>1.0</frameworkversion>
+  <files>
+    <path>/FileCabinet/SuiteScripts/loop_erp/open_po_suitelet/loop_open_po_suitelet.js</path>
+    <path>/FileCabinet/SuiteScripts/loop_erp/open_po_suitelet/loop_open_po_query.js</path>
+    <path>/FileCabinet/SuiteScripts/loop_erp/open_po_suitelet/loop_open_po_html.js</path>
+    <path>/FileCabinet/SuiteScripts/loop_erp/open_po_suitelet/loop_open_po_export.js</path>
+  </files>
+  <objects>
+    <path>/Objects/customscript_loop_open_po_suitelet.xml</path>
+  </objects>
+</manifest>

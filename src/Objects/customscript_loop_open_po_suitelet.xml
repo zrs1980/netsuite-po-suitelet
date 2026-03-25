@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<suitescript:script xmlns:suitescript="http://www.netsuite.com/ns/toolset/scripttype"
+  scripttype="customscriptsuitelet"
+  scriptid="customscript_loop_open_po_suitelet">
+  <description>Open Purchase Order Dashboard — Loop ERP</description>
+  <isinactive>F</isinactive>
+  <name>Loop Open PO Suitelet</name>
+  <scriptfile>[/SuiteScripts/loop_erp/open_po_suitelet/loop_open_po_suitelet.js]</scriptfile>
+  <deployments>
+    <deployment scriptid="customdeploy_loop_open_po_suitelet">
+      <allemployees>F</allemployees>
+      <allpartners>F</allpartners>
+      <allroles>F</allroles>
+      <audslctrole>
+        <role scriptid="customrole_loop_procurement_mgr"/>
+        <role scriptid="customrole_loop_warehouse_mgr"/>
+        <role scriptid="customrole_loop_ap_clerk"/>
+        <role scriptid="customrole_loop_operations_mgr"/>
+        <role internalid="3"/>
+      </audslctrole>
+      <eventtype/>
+      <isdeployed>T</isdeployed>
+      <loglevel>DEBUG</loglevel>
+      <runasrole internalid="3"/>
+      <status>RELEASED</status>
+      <title>Loop Open PO Suitelet</title>
+    </deployment>
+  </deployments>
+</suitescript:script>
