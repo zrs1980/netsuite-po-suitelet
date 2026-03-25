@@ -83,7 +83,7 @@ function oauthHeader(method, url) {
 
   oauthParams.oauth_signature = signature;
 
-  const headerParts = [`realm="${ACCOUNT_ID}"`].concat(
+  const headerParts = [`realm="${ACCOUNT_ID.toUpperCase()}"`].concat(
     Object.keys(oauthParams)
       .sort()
       .map(k => `${k}="${pct(oauthParams[k])}"`)
@@ -119,6 +119,9 @@ async function nsRequest(method, path, body = null) {
   const text = await res.text();
 
   if (!res.ok && res.status !== 204) {
+    // Print the Authorization header shape (no secrets) to aid debugging
+    const authPreview = headers.Authorization.replace(/="[^"]{8}[^"]*"/g, '="***"');
+    console.error(`  Auth header shape: ${authPreview}`);
     throw new Error(`NS ${method} ${path} → HTTP ${res.status}\n${text}`);
   }
 
