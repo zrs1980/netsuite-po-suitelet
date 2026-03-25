@@ -25,7 +25,7 @@ jobs:
           node-version: '20'
 
       - name: Install SuiteCloud CLI
-        run: npm install -g @oracle/suitecloud-cli --legacy-peer-deps
+        run: npm install -g @oracle/suitecloud-cli --legacy-peer-deps --acceptsuitecloudsdklicense
 
       - name: Configure NetSuite Auth
         env:
